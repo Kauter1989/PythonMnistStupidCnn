@@ -336,5 +336,8 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
+# CNN Pretrained Models
+*.h5
+
 # BeatPulse healthcheck temp database
 healthchecksdb

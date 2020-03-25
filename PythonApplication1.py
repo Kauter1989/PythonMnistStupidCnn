@@ -50,14 +50,16 @@ y_test = keras.utils.to_categorical(labels_test, num_classes)
 print("Train set", x_train.shape, y_train.shape)
 print("Test set", x_test.shape, y_test.shape)
 
-# Data is fine, configure simple sequential model
+# Data is fine, configure simple sequential model. TODO: try make more poolings
 cnn_model = Sequential()
-cnn_model.add(Conv2D(32, kernel_size=(3, 3), input_shape=input_shape, activation='relu'))
+cnn_model.add(Conv2D(128, kernel_size=(3, 3), input_shape=input_shape, activation='relu'))
+cnn_model.add(MaxPooling2D(pool_size=(2, 2)))
 cnn_model.add(Conv2D(64, kernel_size=(3, 3), input_shape=input_shape, activation='relu'))
 cnn_model.add(MaxPooling2D(pool_size=(2, 2)))
+cnn_model.add(Conv2D(32, kernel_size=(3, 3), input_shape=input_shape, activation='relu'))
 cnn_model.add(Flatten())
-cnn_model.add(Dropout(0.5))
-cnn_model.add(Dense(128))
+# cnn_model.add(Dropout(0.5))
+# cnn_model.add(Dense(128))
 cnn_model.add(Dense(num_classes, activation='softmax'))
 cnn_model.compile(loss=keras.losses.categorical_crossentropy,
               optimizer=keras.optimizers.Adadelta(),
